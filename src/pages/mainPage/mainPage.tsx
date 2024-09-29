@@ -115,9 +115,8 @@ export function MainPage({cardsCount}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {[...Array<number>(cardsCount)].map((_, i) =>(
+                {[...Array<number>(cardsCount)].map((i) =>(
                   <PlaceCard
-                    // eslint-disable-next-line react/no-array-index-key
                     key={i}
                     imageLink="img/apartment-02.jpg"
                     isPremium
