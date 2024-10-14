@@ -5,8 +5,8 @@ import {AppRoutes} from '../../constants/AppRoutes.ts';
 export function Layout() {
   const location = useLocation();
   const pageClasses = cn('page', {
-    'page--gray page--main': location.pathname === AppRoutes.Main,
-    'page--gray page--login': location.pathname === AppRoutes.Login
+    'page--gray page--main': location.pathname === AppRoutes.Main as string,
+    'page--gray page--login': location.pathname === AppRoutes.Login as string
   });
   return (
     <div className={pageClasses}>
