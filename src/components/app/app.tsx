@@ -7,7 +7,7 @@ import {NotFoundPage} from '../../pages/notFoundPage/notFoundPage.tsx';
 import {AppRoutes} from '../../constants/AppRoutes.ts';
 import {AuthStatus} from '../../constants/AuthStatus.ts';
 import {PrivateRoute} from '../privateRoute/privateRoute.tsx';
-import {FavouritesPage} from '../../pages/favouritesPage/favouritesPage.tsx';
+import {FavoritesPage} from '../../pages/favoritesPage/favoritesPage.tsx';
 
 type AppProps = {
   cardsCount: number;
@@ -21,7 +21,7 @@ export function App({cardsCount}: AppProps): JSX.Element {
           <Route index path={AppRoutes.Main} element={<MainPage cardsCount={cardsCount}/>}/>
           <Route path={AppRoutes.Login} element={<LoginPage/>}></Route>
           <Route element={<PrivateRoute authStatus={AuthStatus.NoAuth}/>}>
-            <Route path={AppRoutes.Favourites} element={<FavouritesPage/>}></Route>
+            <Route path={AppRoutes.Favourites} element={<FavoritesPage/>}></Route>
           </Route>
           <Route path={AppRoutes.Offer} element={<OfferPage/>}></Route>
           <Route path='*' element={<NotFoundPage />}></Route>

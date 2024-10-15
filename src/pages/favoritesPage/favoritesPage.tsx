@@ -1,4 +1,4 @@
-export function FavouritesPage() {
+export function FavoritesPage() {
   return (
     <div className="page">
       <main className="page__main page__main--favorites">
