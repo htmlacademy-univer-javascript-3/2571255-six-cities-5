@@ -1,38 +1,63 @@
-type PlaceCardProps = {
-  isPremium: boolean;
-  imageLink: string;
-  price: number;
-  rating: number;
-  title: string;
-  type: string;
+import {Offer} from '../../models/offer.ts';
+import { Link } from 'react-router-dom';
+import {CardTypes} from '../../constants/cardTypes.ts';
+import cn from 'classnames';
+
+type PlaceCardProps = Offer & {
+  cardType: CardTypes;
+  onMouseOver?: () => void;
+  onMouseLeave?: () => void;
 }
 
-export function PlaceCard({isPremium, imageLink, price, rating, title, type}: PlaceCardProps): JSX.Element {
+export function PlaceCard({
+  id,
+  isPremium,
+  images,
+  price,
+  rating,
+  title,
+  type,
+  isFavorite,
+  cardType,
+  onMouseLeave,
+  onMouseOver
+}: PlaceCardProps) {
+
   return (
-    <article className="cities__place-card place-card">
+    <article className={cn('place-card', {
+      'cities__card': cardType === CardTypes.Cities,
+      'favorites__card': cardType === CardTypes.Favorites,
+    })}
+    onMouseLeave={onMouseLeave}
+    onMouseOver={onMouseOver}
+    >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+      <div className={cn('place-place-card__image-wrapper', {
+        'cities__image-wrapper': cardType === CardTypes.Cities,
+        'favorites__image-wrapper': cardType === CardTypes.Favorites,
+      })}
+      >
+        <Link to={`/offer/${id}`}>
           <img
             className="place-card__image"
-            src={imageLink}
-            width={260}
-            height={200}
+            src={images[0]}
+            width={cardType === CardTypes.Cities ? 260 : 150}
+            height={cardType === CardTypes.Cities ? 200 : 110}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
-      <div className="place-card__info">
+      <div className={cn('place-card__info', {'favorites__card-info': cardType === CardTypes.Cities})}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
           >
             <svg
@@ -42,7 +67,7 @@ export function PlaceCard({isPremium, imageLink, price, rating, title, type}: Pl
             >
               <use xlinkHref="#icon-bookmark"/>
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -52,9 +77,9 @@ export function PlaceCard({isPremium, imageLink, price, rating, title, type}: Pl
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">
+          <Link to={`/offer/${id}`}>
             {title}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

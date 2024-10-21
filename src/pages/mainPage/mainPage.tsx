@@ -1,10 +1,14 @@
-import {PlaceCard} from '../../components/placeCard/placeCard.tsx';
+import {Offer} from '../../models/offer.ts';
+import {CardTypes} from '../../constants/cardTypes.ts';
+import {AppRoutes} from '../../constants/appRoutes.ts';
+import {CardList} from '../../components/placeCard/placeCardList.tsx';
+import { Link } from 'react-router-dom';
 
 type MainScreenProps = {
-  cardsCount: number;
+  offers: Offer[];
 };
 
-export function MainPage({cardsCount}: MainScreenProps): JSX.Element {
+export function MainPage({offers}: MainScreenProps) {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -12,34 +16,46 @@ export function MainPage({cardsCount}: MainScreenProps): JSX.Element {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item"
+                to={AppRoutes.Main}
+              >
                 <span>Paris</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item"
+                to={AppRoutes.Main}
+              >
                 <span>Cologne</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item"
+                to={AppRoutes.Main}
+              >
                 <span>Brussels</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active">
+              <Link className="locations__item-link tabs__item"
+                to={AppRoutes.Main}
+              >
                 <span>Amsterdam</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item"
+                to={AppRoutes.Main}
+              >
                 <span>Hamburg</span>
-              </a>
+              </Link>
             </li>
             <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#">
+              <Link className="locations__item-link tabs__item"
+                to={AppRoutes.Main}
+              >
                 <span>Dusseldorf</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </section>
@@ -75,19 +91,7 @@ export function MainPage({cardsCount}: MainScreenProps): JSX.Element {
                 </li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {[...Array<number>(cardsCount)].map((i) =>(
-                <PlaceCard
-                  key={i}
-                  imageLink="img/apartment-02.jpg"
-                  isPremium
-                  price={120}
-                  rating={4}
-                  title="Beautiful & luxurious apartment at great location"
-                  type="Apartment"
-                />)
-              )}
-            </div>
+            <CardList offers={offers} listType={CardTypes.Cities}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"/>
