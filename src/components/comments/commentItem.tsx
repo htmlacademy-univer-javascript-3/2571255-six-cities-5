@@ -4,7 +4,6 @@ import {ConvertDate} from '../../common/dateTimeConverter.ts';
 type CommentItemProps = Comment;
 
 export function CommentItem({user, rating, comment, date}:CommentItemProps){
-  console.log(rating * 100 / 5);
   return(
     <li className="reviews__item">
       <div className="reviews__user user">
