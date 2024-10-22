@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import {AppRoutes} from '../../constants/AppRoutes.ts';
+import {AppRoutes} from '../../constants/app-routes.ts';
 import './style.css';
 export function NotFoundPage() {
   return (

@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import {AppRoutes} from '../../constants/app-routes.ts';
+
 export function LoginPage() {
   return (
     <main className="page__main page__main--login">
@@ -32,9 +35,12 @@ export function LoginPage() {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#">
+            <Link
+              className="locations__item-link"
+              to={AppRoutes.Main}
+            >
               <span>Amsterdam</span>
-            </a>
+            </Link>
           </div>
         </section>
       </div>
