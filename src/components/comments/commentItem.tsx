@@ -1,5 +1,7 @@
 import {Comment} from '../../models/comment.ts';
 import {ConvertDate} from '../../common/dateTimeConverter.ts';
+import {RatingClasses} from '../../constants/ratingClasses.ts';
+import {RatingStars} from '../ratingStars/ratingStars.tsx';
 
 type CommentItemProps = Comment;
 
@@ -19,12 +21,7 @@ export function CommentItem({user, rating, comment, date}:CommentItemProps){
         <span className="reviews__user-name">{user.name}</span>
       </div>
       <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <span style={{width: `${rating * 100 / 5}%`}}/>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <RatingStars rating={rating} ratingClass={RatingClasses.Comment} isValueHidden/>
         <p className="reviews__text">{comment}</p>
         <time className="reviews__time" dateTime={date}>{ConvertDate(date)}</time>
       </div>

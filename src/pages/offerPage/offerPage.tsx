@@ -3,6 +3,8 @@ import {Comment} from '../../models/comment.ts';
 import {OfferGoods} from './offerGoods.tsx';
 import {CommentList} from '../../components/comments/commentList.tsx';
 import {CommentForm} from '../../components/comments/commentForm.tsx';
+import {RatingStars} from '../../components/ratingStars/ratingStars.tsx';
+import {RatingClasses} from '../../constants/ratingClasses.ts';
 
 type OfferPageProps = {
   offer: Offer;
@@ -44,13 +46,7 @@ export function OfferPage({offer, comments}: OfferPageProps) {
                   <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
                 </button>
               </div>
-              <div className="offer__rating rating">
-                <div className="offer__stars rating__stars">
-                  <span style={{width: `${(offer.rating * 100) / 5}%`}}/>
-                  <span className="visually-hidden">Rating</span>
-                </div>
-                <span className="offer__rating-value rating__value">{offer.rating}</span>
-              </div>
+              <RatingStars rating={offer.rating} isValueHidden={false} ratingClass={RatingClasses.Offer}/>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">{offer.type}</li>
                 <li className="offer__feature offer__feature--bedrooms">
