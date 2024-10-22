@@ -1,11 +1,11 @@
 import {useState} from 'react';
-import {Offer} from '../../models/offer.ts';
-import {PlaceCard} from './placeCard.tsx';
+import {PlaceCard} from './place-card.tsx';
 import {Nullable} from 'vitest';
-import {CardTypes} from '../../constants/cardTypes.ts';
+import {CardTypes} from '../../constants/card-types.ts';
+import {OfferListItem} from '../../models/offer-list-item.ts';
 
 type PlaceCardListProps = {
-  offers: Offer[];
+  offers: OfferListItem[];
   listType: CardTypes;
 }
 

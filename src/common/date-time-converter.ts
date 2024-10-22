@@ -1,4 +1,4 @@
-import {monthNames} from '../constants/monthNames.ts';
+import {monthNames} from '../constants/month-names.ts';
 
 export function ConvertDate(stringDate: string): string{
   const date = new Date(stringDate);

@@ -1,9 +1,12 @@
-import {Offer} from '../../models/offer.ts';
-import { Link } from 'react-router-dom';
-import {CardTypes} from '../../constants/cardTypes.ts';
+import {Link} from 'react-router-dom';
+import {CardTypes} from '../../constants/card-types.ts';
 import cn from 'classnames';
+import {OfferListItem} from '../../models/offer-list-item.ts';
+import {AppRoutes} from '../../constants/app-routes.ts';
+import {RatingStars} from '../rating-stars/rating-stars.tsx';
+import {RatingClasses} from '../../constants/rating-classes.ts';
 
-type PlaceCardProps = Offer & {
+type PlaceCardProps = OfferListItem & {
   cardType: CardTypes;
   onMouseOver?: () => void;
   onMouseLeave?: () => void;
@@ -12,7 +15,7 @@ type PlaceCardProps = Offer & {
 export function PlaceCard({
   id,
   isPremium,
-  images,
+  previewImage,
   price,
   rating,
   title,
@@ -22,6 +25,8 @@ export function PlaceCard({
   onMouseLeave,
   onMouseOver
 }: PlaceCardProps) {
+
+  const singleOfferUrl = AppRoutes.Offer.replace('id', id);
 
   return (
     <article className={cn('place-card', {
@@ -40,10 +45,10 @@ export function PlaceCard({
         'favorites__image-wrapper': cardType === CardTypes.Favorites,
       })}
       >
-        <Link to={`/offer/${id}`}>
+        <Link to={singleOfferUrl}>
           <img
             className="place-card__image"
-            src={images[0]}
+            src={previewImage}
             width={cardType === CardTypes.Cities ? 260 : 150}
             height={cardType === CardTypes.Cities ? 200 : 110}
             alt="Place image"
@@ -70,14 +75,9 @@ export function PlaceCard({
             <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}}/>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <RatingStars rating={rating} ratingClass={RatingClasses.PlaceCard} isValueHidden/>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>
+          <Link to={singleOfferUrl}>
             {title}
           </Link>
         </h2>

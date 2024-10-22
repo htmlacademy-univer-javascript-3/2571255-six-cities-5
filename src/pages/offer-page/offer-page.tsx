@@ -1,10 +1,10 @@
 import {Offer} from '../../models/offer.ts';
 import {Comment} from '../../models/comment.ts';
-import {OfferGoods} from './offerGoods.tsx';
-import {CommentList} from '../../components/comments/commentList.tsx';
-import {CommentForm} from '../../components/comments/commentForm.tsx';
-import {RatingStars} from '../../components/ratingStars/ratingStars.tsx';
-import {RatingClasses} from '../../constants/ratingClasses.ts';
+import {OfferGoods} from './offer-goods.tsx';
+import {CommentList} from '../../components/comments/comment-list.tsx';
+import {CommentForm} from '../../components/comments/comment-form.tsx';
+import {RatingStars} from '../../components/rating-stars/rating-stars.tsx';
+import {RatingClasses} from '../../constants/rating-classes.ts';
 
 type OfferPageProps = {
   offer: Offer;

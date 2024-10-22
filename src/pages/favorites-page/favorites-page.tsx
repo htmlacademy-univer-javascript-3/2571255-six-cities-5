@@ -1,9 +1,10 @@
-import {FavoritesList} from './favoritesList.tsx';
-import {Offer} from '../../models/offer.ts';
+import {FavoritesList} from './favorites-list.tsx';
 import { Link } from 'react-router-dom';
+import {OfferListItem} from '../../models/offer-list-item.ts';
+import {AppRoutes} from '../../constants/app-routes.ts';
 
 type FavoritesPageProps = {
-  offers: Offer[];
+  offers: OfferListItem[];
 };
 
 export function FavoritesPage({offers}: FavoritesPageProps) {
@@ -19,7 +20,7 @@ export function FavoritesPage({offers}: FavoritesPageProps) {
       </main>
       <footer className="footer container">
         <Link className="footer__logo-link"
-          to="main.html"
+          to={AppRoutes.Main}
         >
           <img
             className="footer__logo"

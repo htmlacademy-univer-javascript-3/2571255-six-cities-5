@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { Outlet, useLocation, Link } from 'react-router-dom';
-import {AppRoutes} from '../../constants/appRoutes.ts';
+import {AppRoutes} from '../../constants/app-routes.ts';
 
 export function Layout() {
   const location = useLocation();

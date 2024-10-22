@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import {AppRoutes} from '../../constants/app-routes.ts';
 
 export function LoginPage() {
   return (
@@ -36,7 +37,7 @@ export function LoginPage() {
           <div className="locations__item">
             <Link
               className="locations__item-link"
-              to="/"
+              to={AppRoutes.Main}
             >
               <span>Amsterdam</span>
             </Link>

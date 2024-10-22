@@ -1,7 +1,7 @@
 import {Comment} from '../../models/comment.ts';
-import {ConvertDate} from '../../common/dateTimeConverter.ts';
-import {RatingClasses} from '../../constants/ratingClasses.ts';
-import {RatingStars} from '../ratingStars/ratingStars.tsx';
+import {ConvertDate} from '../../common/date-time-converter.ts';
+import {RatingClasses} from '../../constants/rating-classes.ts';
+import {RatingStars} from '../rating-stars/rating-stars.tsx';
 
 type CommentItemProps = Comment;
 

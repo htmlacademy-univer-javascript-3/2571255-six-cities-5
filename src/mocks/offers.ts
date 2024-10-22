@@ -1,7 +1,7 @@
-import { Offer } from '../models/offer.ts';
-import { MockCities } from './cities.ts';
-import { MockLocations } from './locations.ts';
-import { MockHosts } from './hosts.ts';
+import {Offer} from '../models/offer.ts';
+import {MockCities} from './cities.ts';
+import {MockLocations} from './locations.ts';
+import {MockHosts} from './hosts.ts';
 
 export const MockOffers: Offer[] = [
   {
@@ -18,7 +18,7 @@ export const MockOffers: Offer[] = [
     bedrooms: 2,
     goods: ['Wi-Fi', 'Kitchen', 'TV'],
     host: MockHosts[0],
-    images: ['https://url-to-image/image1.png', 'https://url-to-image/image2.png'],
+    images: ['https://14.design.htmlacademy.pro/static/hotel/1.jpg', 'https://14.design.htmlacademy.pro/static/hotel/7.jpg'],
     maxAdults: 4
   },
   {
@@ -35,7 +35,7 @@ export const MockOffers: Offer[] = [
     bedrooms: 4,
     goods: ['Wi-Fi', 'Kitchen', 'TV', 'Garden'],
     host: MockHosts[1],
-    images: ['https://url-to-image/image3.png', 'https://url-to-image/image4.png'],
+    images: ['https://14.design.htmlacademy.pro/static/hotel/1.jpg', 'https://14.design.htmlacademy.pro/static/hotel/8.jpg'],
     maxAdults: 6
   },
   {
@@ -52,7 +52,7 @@ export const MockOffers: Offer[] = [
     bedrooms: 1,
     goods: ['Wi-Fi', 'Kitchen', 'TV'],
     host: MockHosts[2],
-    images: ['https://url-to-image/image5.png', 'https://url-to-image/image6.png'],
+    images: ['https://14.design.htmlacademy.pro/static/hotel/1.jpg', 'https://14.design.htmlacademy.pro/static/hotel/9.jpg'],
     maxAdults: 2
   },
   {
@@ -69,7 +69,7 @@ export const MockOffers: Offer[] = [
     bedrooms: 5,
     goods: ['Wi-Fi', 'Kitchen', 'TV', 'Pool'],
     host: MockHosts[3],
-    images: ['https://url-to-image/image7.png', 'https://url-to-image/image8.png'],
+    images: ['https://14.design.htmlacademy.pro/static/hotel/1.jpg', 'https://14.design.htmlacademy.pro/static/hotel/10.jpg'],
     maxAdults: 8
   },
   {
@@ -86,7 +86,7 @@ export const MockOffers: Offer[] = [
     bedrooms: 3,
     goods: ['Wi-Fi', 'Kitchen', 'TV'],
     host: MockHosts[4],
-    images: ['https://url-to-image/image9.png', 'https://url-to-image/image10.png'],
+    images: ['https://14.design.htmlacademy.pro/static/hotel/1.jpg', 'https://14.design.htmlacademy.pro/static/hotel/11.jpg'],
     maxAdults: 5
   },
   {
@@ -103,7 +103,7 @@ export const MockOffers: Offer[] = [
     bedrooms: 2,
     goods: ['Wi-Fi', 'Kitchen', 'TV'],
     host: MockHosts[5],
-    images: ['https://url-to-image/image11.png', 'https://url-to-image/image12.png'],
+    images: ['https://14.design.htmlacademy.pro/static/hotel/1.jpg', 'https://14.design.htmlacademy.pro/static/hotel/12.jpg'],
     maxAdults: 4
   }
 ];

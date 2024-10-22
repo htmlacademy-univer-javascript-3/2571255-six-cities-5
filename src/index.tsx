@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {App} from './components/app/app';
-import {MockOffers} from './mocks/offers.ts';
 import {MockComments} from './mocks/comments.ts';
+import {MockOffersList} from './mocks/offer-list-items.ts';
+import {MockOffers} from './mocks/offers.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offers={MockOffers} comments={MockComments} />
+    <App offerList={MockOffersList} comments={MockComments} offer={MockOffers[0]}/>
   </React.StrictMode>
 );

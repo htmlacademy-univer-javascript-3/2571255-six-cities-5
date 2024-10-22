@@ -1,4 +1,5 @@
 export enum RatingClasses{
   Offer,
-  Comment
+  Comment,
+  PlaceCard
 }

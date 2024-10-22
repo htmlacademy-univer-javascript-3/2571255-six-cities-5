@@ -1,5 +1,5 @@
 import {Comment} from '../../models/comment.ts';
-import {CommentItem} from './commentItem.tsx';
+import {CommentItem} from './comment-item.tsx';
 
 type CommentListProps = {
   comments: Comment[];

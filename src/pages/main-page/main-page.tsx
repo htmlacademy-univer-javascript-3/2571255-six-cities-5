@@ -1,11 +1,11 @@
-import {Offer} from '../../models/offer.ts';
-import {CardTypes} from '../../constants/cardTypes.ts';
-import {AppRoutes} from '../../constants/appRoutes.ts';
-import {CardList} from '../../components/placeCard/placeCardList.tsx';
+import {CardTypes} from '../../constants/card-types.ts';
+import {AppRoutes} from '../../constants/app-routes.ts';
+import {CardList} from '../../components/place-card/place-card-list.tsx';
 import { Link } from 'react-router-dom';
+import {OfferListItem} from '../../models/offer-list-item.ts';
 
 type MainScreenProps = {
-  offers: Offer[];
+  offers: OfferListItem[];
 };
 
 export function MainPage({offers}: MainScreenProps) {
@@ -64,7 +64,7 @@ export function MainPage({offers}: MainScreenProps) {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">312 places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>

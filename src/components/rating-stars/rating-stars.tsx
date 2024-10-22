@@ -1,4 +1,4 @@
-import {RatingClasses} from '../../constants/ratingClasses.ts';
+import {RatingClasses} from '../../constants/rating-classes.ts';
 
 type RatingStarsProps = {
   rating: number;
@@ -7,8 +7,9 @@ type RatingStarsProps = {
 };
 
 export function RatingStars({rating, ratingClass, isValueHidden}: RatingStarsProps) {
-  const page = ratingClass === RatingClasses.Comment ? 'reviews'
-    : 'offer';
+  // eslint-disable-next-line no-nested-ternary
+  const page = ratingClass !== RatingClasses.Comment ?
+    ratingClass === RatingClasses.Offer ? 'offer' : 'place-card' : 'reviews';
 
   return (
     <div className={`${page}__rating rating`}>

@@ -1,10 +1,10 @@
-import {PlaceCard} from '../../components/placeCard/placeCard.tsx';
-import {CardTypes} from '../../constants/cardTypes.ts';
-import {Offer} from '../../models/offer.ts';
+import {PlaceCard} from '../../components/place-card/place-card.tsx';
+import {CardTypes} from '../../constants/card-types.ts';
 import { Link } from 'react-router-dom';
+import {OfferListItem} from '../../models/offer-list-item.ts';
 
 type FavoritesListProps = {
-  offers: Offer[];
+  offers: OfferListItem[];
 };
 
 export function FavoritesList({offers}: FavoritesListProps){
