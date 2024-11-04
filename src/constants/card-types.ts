@@ -1,4 +1,5 @@
 export enum CardTypes {
   Cities,
-  Favorites
+  Favorites,
+  Nearby
 }
