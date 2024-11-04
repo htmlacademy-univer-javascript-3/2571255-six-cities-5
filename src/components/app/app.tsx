@@ -29,7 +29,7 @@ export function App({offer, comments, offerList}: AppProps) {
           <Route element={<PrivateRoute authStatus={AuthStatus.Auth}/>}>
             <Route path={AppRoutes.Favourites} element={<FavoritesPage offers={offerList}/>}></Route>
           </Route>
-          <Route path={AppRoutes.Offer} element={<OfferPage comments={comments} offer={offer}/>}></Route>
+          <Route path={AppRoutes.Offer} element={<OfferPage comments={comments} offer={offer} nearbyOffers={offerList}/>}></Route>
           <Route path='*' element={<NotFoundPage />}></Route>
         </Route>
       </Routes>
