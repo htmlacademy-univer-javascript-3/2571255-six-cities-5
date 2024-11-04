@@ -1,6 +1,7 @@
+import {PlaceCard} from '../../components/place-card/place-card.tsx';
+import {CardTypes} from '../../constants/card-types.ts';
 import { Link } from 'react-router-dom';
 import {OfferListItem} from '../../models/offer-list-item.ts';
-import {FavoritesCardList} from '../../components/place-card/place-card-list.tsx';
 
 type FavoritesListProps = {
   offers: OfferListItem[];
@@ -22,7 +23,16 @@ export function FavoritesList({offers}: FavoritesListProps){
               </Link>
             </div>
           </div>
-          <FavoritesCardList offers={offers}/>
+          <div className="favorites__places">
+            {offers.filter((x) => x.city.name === c)
+              .map((offer) => (
+                <PlaceCard
+                  key={offer.id}
+                  {...offer}
+                  cardType={CardTypes.Favorites}
+                />
+              ))}
+          </div>
         </li>
       ))}
     </ul>

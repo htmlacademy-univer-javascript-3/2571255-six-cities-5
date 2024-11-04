@@ -10,8 +10,6 @@ import {Nullable} from 'vitest';
 type PlaceCardProps = OfferListItem & {
   cardType: CardTypes;
   onHover?: (id: Nullable<string>) => void;
-  width: number;
-  height: number;
 }
 
 export function PlaceCard({
@@ -24,9 +22,7 @@ export function PlaceCard({
   type,
   isFavorite,
   cardType,
-  onHover,
-  width,
-  height
+  onHover
 }: PlaceCardProps) {
 
   const singleOfferUrl = AppRoutes.Offer.replace('id', id);
@@ -35,7 +31,6 @@ export function PlaceCard({
     <article className={cn('place-card', {
       'cities__card': cardType === CardTypes.Cities,
       'favorites__card': cardType === CardTypes.Favorites,
-      'near-places__card': cardType === CardTypes.Nearby
     })}
     onMouseLeave={() => onHover?.call(null, null)}
     onMouseOver={() => onHover?.call(null, id)}
@@ -47,15 +42,14 @@ export function PlaceCard({
       <div className={cn('place-place-card__image-wrapper', {
         'cities__image-wrapper': cardType === CardTypes.Cities,
         'favorites__image-wrapper': cardType === CardTypes.Favorites,
-        'near-places__image-wrapper': cardType === CardTypes.Nearby
       })}
       >
         <Link to={singleOfferUrl}>
           <img
             className="place-card__image"
             src={previewImage}
-            width={width}
-            height={height}
+            width={cardType === CardTypes.Cities ? 260 : 150}
+            height={cardType === CardTypes.Cities ? 200 : 110}
             alt="Place image"
           />
         </Link>

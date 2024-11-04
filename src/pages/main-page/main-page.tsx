@@ -1,5 +1,6 @@
+import {CardTypes} from '../../constants/card-types.ts';
 import {AppRoutes} from '../../constants/app-routes.ts';
-import {CitiesCardList} from '../../components/place-card/place-card-list.tsx';
+import {CardList} from '../../components/place-card/place-card-list.tsx';
 import { Link } from 'react-router-dom';
 import {OfferListItem} from '../../models/offer-list-item.ts';
 import {Map} from '../../components/map/map.tsx';
@@ -98,13 +99,10 @@ export function MainPage({offers, city}: MainScreenProps) {
                 </li>
               </ul>
             </form>
-            <CitiesCardList
-              offers={offers}
-              onItemHover={setSelectedId}
-            />
+            <CardList offers={offers} listType={CardTypes.Cities} onItemHover={setSelectedId}/>
           </section>
           <div className="cities__right-section">
-            <Map city={city} selectedPoint={points.find((p) => p.name === selectedId)} points={points} className="cities__map map"/>
+            <Map city={city} selectedPoint={points.find((p) => p.name === selectedId)} points={points}/>
           </div>
         </div>
       </div>
