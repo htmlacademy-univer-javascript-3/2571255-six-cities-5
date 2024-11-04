@@ -11,6 +11,7 @@ import {FavoritesPage} from '../../pages/favorites-page/favorites-page.tsx';
 import {Offer} from '../../models/offer.ts';
 import {Comment} from '../../models/comment.ts';
 import {OfferListItem} from '../../models/offer-list-item.ts';
+import {MockLocations} from '../../mocks/locations.ts';
 
 type AppProps = {
   offerList: OfferListItem[];
@@ -23,7 +24,7 @@ export function App({offer, comments, offerList}: AppProps) {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route index path={AppRoutes.Main} element={<MainPage offers={offerList}/>}/>
+          <Route index path={AppRoutes.Main} element={<MainPage offers={offerList} city={MockLocations[0]}/>}/>
           <Route path={AppRoutes.Login} element={<LoginPage/>}></Route>
           <Route element={<PrivateRoute authStatus={AuthStatus.Auth}/>}>
             <Route path={AppRoutes.Favourites} element={<FavoritesPage offers={offerList}/>}></Route>

@@ -1,6 +1,6 @@
-import { MockCities } from './cities.ts';
 import { MockLocations } from './locations.ts';
 import {OfferListItem} from '../models/offer-list-item.ts';
+import {MockPoints} from './points.ts';
 
 export const MockOffersList: OfferListItem[] = [
   {
@@ -8,8 +8,8 @@ export const MockOffersList: OfferListItem[] = [
     title: 'Cozy apartment in the city center',
     type: 'apartment',
     price: 120,
-    city: MockCities[0],
-    location: MockLocations[0],
+    city: MockLocations[0],
+    location: MockPoints[1],
     isFavorite: true,
     isPremium: false,
     rating: 4.5,
@@ -20,8 +20,8 @@ export const MockOffersList: OfferListItem[] = [
     title: 'Spacious house with a garden',
     type: 'house',
     price: 250,
-    city: MockCities[1],
-    location: MockLocations[1],
+    city: MockLocations[0],
+    location: MockPoints[2],
     isFavorite: false,
     isPremium: true,
     rating: 5.0,
@@ -32,8 +32,8 @@ export const MockOffersList: OfferListItem[] = [
     title: 'Modern studio in the heart of the city',
     type: 'studio',
     price: 90,
-    city: MockCities[2],
-    location: MockLocations[2],
+    city: MockLocations[0],
+    location: MockPoints[3],
     isFavorite: true,
     isPremium: false,
     rating: 4.0,
@@ -44,35 +44,11 @@ export const MockOffersList: OfferListItem[] = [
     title: 'Luxury villa with a pool',
     type: 'villa',
     price: 500,
-    city: MockCities[3],
-    location: MockLocations[3],
+    city: MockLocations[0],
+    location: MockPoints[4],
     isFavorite: false,
     isPremium: true,
     rating: 5.0,
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/4.jpg'
-  },
-  {
-    id: '5',
-    title: 'Charming cottage by the lake',
-    type: 'cottage',
-    price: 180,
-    city: MockCities[4],
-    location: MockLocations[4],
-    isFavorite: true,
-    isPremium: false,
-    rating: 4.8,
-    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/5.jpg'
-  },
-  {
-    id: '6',
-    title: 'Stylish apartment in the historic district',
-    type: 'apartment',
-    price: 150,
-    city: MockCities[5],
-    location: MockLocations[5],
-    isFavorite: false,
-    isPremium: true,
-    rating: 4.7,
-    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/6.jpg'
   }
 ];

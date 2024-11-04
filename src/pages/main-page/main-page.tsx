@@ -3,12 +3,20 @@ import {AppRoutes} from '../../constants/app-routes.ts';
 import {CardList} from '../../components/place-card/place-card-list.tsx';
 import { Link } from 'react-router-dom';
 import {OfferListItem} from '../../models/offer-list-item.ts';
+import {Map} from '../../components/map/map.tsx';
+import {Nullable} from 'vitest';
+import {useState} from 'react';
+import {Location} from '../../models/location.ts';
 
 type MainScreenProps = {
   offers: OfferListItem[];
+  city: Location;
 };
 
-export function MainPage({offers}: MainScreenProps) {
+export function MainPage({offers, city}: MainScreenProps) {
+  const [selectedId, setSelectedId] = useState<Nullable<string>>();
+  const points = offers.map((o) => ({ name: o.id, point: o.location }));
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -91,10 +99,10 @@ export function MainPage({offers}: MainScreenProps) {
                 </li>
               </ul>
             </form>
-            <CardList offers={offers} listType={CardTypes.Cities}/>
+            <CardList offers={offers} listType={CardTypes.Cities} onItemHover={setSelectedId}/>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"/>
+            <Map city={city} selectedPoint={points.find((p) => p.name === selectedId)} points={points}/>
           </div>
         </div>
       </div>

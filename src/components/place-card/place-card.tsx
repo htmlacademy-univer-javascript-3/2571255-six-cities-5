@@ -5,11 +5,11 @@ import {OfferListItem} from '../../models/offer-list-item.ts';
 import {AppRoutes} from '../../constants/app-routes.ts';
 import {RatingStars} from '../rating-stars/rating-stars.tsx';
 import {RatingClasses} from '../../constants/rating-classes.ts';
+import {Nullable} from 'vitest';
 
 type PlaceCardProps = OfferListItem & {
   cardType: CardTypes;
-  onMouseOver?: () => void;
-  onMouseLeave?: () => void;
+  onHover?: (id: Nullable<string>) => void;
 }
 
 export function PlaceCard({
@@ -22,8 +22,7 @@ export function PlaceCard({
   type,
   isFavorite,
   cardType,
-  onMouseLeave,
-  onMouseOver
+  onHover
 }: PlaceCardProps) {
 
   const singleOfferUrl = AppRoutes.Offer.replace('id', id);
@@ -33,8 +32,8 @@ export function PlaceCard({
       'cities__card': cardType === CardTypes.Cities,
       'favorites__card': cardType === CardTypes.Favorites,
     })}
-    onMouseLeave={onMouseLeave}
-    onMouseOver={onMouseOver}
+    onMouseLeave={() => onHover?.call(null, null)}
+    onMouseOver={() => onHover?.call(null, id)}
     >
       {isPremium &&
         <div className="place-card__mark">
