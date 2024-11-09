@@ -11,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App offerList={MockOffersList} comments={MockComments} offer={MockOffers[0]}/>
+    <App offerList={MockOffersList} comments={MockComments} offers={MockOffers}/>
   </React.StrictMode>
 );

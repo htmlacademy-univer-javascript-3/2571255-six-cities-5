@@ -1,5 +1,6 @@
+import {Point} from './point.ts';
+
 export type Location = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
+  name: string;
+  point: Point;
 };
