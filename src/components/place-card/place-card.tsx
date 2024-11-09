@@ -29,7 +29,7 @@ export function PlaceCard({
   height
 }: PlaceCardProps) {
 
-  const singleOfferUrl = AppRoutes.Offer.replace('id', id);
+  const singleOfferUrl = AppRoutes.Offer.replace(':id', id);
 
   return (
     <article className={cn('place-card', {

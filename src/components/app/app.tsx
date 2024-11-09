@@ -15,11 +15,11 @@ import {MockLocations} from '../../mocks/locations.ts';
 
 type AppProps = {
   offerList: OfferListItem[];
-  offer: Offer;
+  offers: Offer[];
   comments: Comment[];
 };
 
-export function App({offer, comments, offerList}: AppProps) {
+export function App({offers, comments, offerList}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +29,7 @@ export function App({offer, comments, offerList}: AppProps) {
           <Route element={<PrivateRoute authStatus={AuthStatus.Auth}/>}>
             <Route path={AppRoutes.Favourites} element={<FavoritesPage offers={offerList}/>}></Route>
           </Route>
-          <Route path={AppRoutes.Offer} element={<OfferPage comments={comments} offer={offer} nearbyOffers={offerList}/>}></Route>
+          <Route path={AppRoutes.Offer} element={<OfferPage comments={comments} offers={offers} nearbyOffers={offerList}/>}></Route>
           <Route path='*' element={<NotFoundPage />}></Route>
         </Route>
       </Routes>

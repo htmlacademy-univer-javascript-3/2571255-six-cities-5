@@ -10,20 +10,29 @@ import {Map} from '../../components/map/map.tsx';
 import {NearbyCardList} from '../../components/place-card/place-card-list.tsx';
 import 'leaflet/dist/leaflet.css';
 import styles from './offerMap.module.css';
+import {useParams} from 'react-router-dom';
+import {NotFoundPage} from '../not-found-page/not-found-page.tsx';
 
 type OfferPageProps = {
-  offer: Offer;
+  offers: Offer[];
   comments: Comment[];
   nearbyOffers: OfferListItem[];
 };
 
-export function OfferPage({offer, comments, nearbyOffers}: OfferPageProps) {
-  const offerLocation = { name: offer.id, point: offer.location };
+export function OfferPage({offers, comments, nearbyOffers}: OfferPageProps) {
+  const params = useParams();
+  const offer = offers.find((o) => o.id === params.id);
+
+  if (!offer){
+    return (<NotFoundPage/>);
+  }
+
+  const offerLocation = {name: offer.id, point: offer.location};
   const displayedOffers = nearbyOffers
     .filter((o) => o.id !== offer.id)
     .slice(0, 3);
   const nearbyPoints = displayedOffers
-    .map((o) => ({ name: o.id, point: o.location }))
+    .map((o) => ({name: o.id, point: o.location}))
     .concat(offerLocation);
 
   return (
