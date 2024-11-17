@@ -9,20 +9,27 @@ const cities = [
   'Hamburg',
   'Dusseldorf',
 ];
-export function Tabs({ selectedCity }: { selectedCity: string }) {
+
+type TabsProps = {
+  selectedCity: string;
+  onClick: (city: string) => void;
+}
+
+export function Tabs({ selectedCity, onClick }: TabsProps) {
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          {cities.map((c) => (
-            <li key={c} className="locations__item">
+          {cities.map((city) => (
+            <li key={city} className="locations__item">
               <Link
                 to={AppRoutes.Main}
                 className={cn('locations__item-link', 'tabs__item', {
-                  ['tabs__item--active']: c === selectedCity,
+                  ['tabs__item--active']: city === selectedCity,
                 })}
+                onClick={() => onClick(city)}
               >
-                <span>{c}</span>
+                <span>{city}</span>
               </Link>
             </li>
           ))}

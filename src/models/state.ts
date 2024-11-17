@@ -1,7 +1,8 @@
-import {Location} from './location.ts';
 import {OfferListItem} from './offer-list-item.ts';
+import {SortingOrder} from './sorting-order.ts';
 
 export type State = {
-  city: Location;
+  city: string;
   offers: OfferListItem[];
+  sortingOrder: SortingOrder;
 };
