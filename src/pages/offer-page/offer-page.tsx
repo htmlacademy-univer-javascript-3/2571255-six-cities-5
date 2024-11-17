@@ -29,7 +29,7 @@ export function OfferPage({offers, comments, nearbyOffers}: OfferPageProps) {
 
   const offerLocation = {name: offer.id, point: offer.location};
   const displayedOffers = nearbyOffers
-    .filter((o) => o.id !== offer.id)
+    .filter((o) => o.id !== offer.id && o.city.name === offer.city.name)
     .slice(0, 3);
   const nearbyPoints = displayedOffers
     .map((o) => ({name: o.id, point: o.location}))

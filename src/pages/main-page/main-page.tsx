@@ -1,77 +1,37 @@
-import {AppRoutes} from '../../constants/app-routes.ts';
 import {CitiesCardList} from '../../components/place-card/place-card-list.tsx';
-import { Link } from 'react-router-dom';
-import {OfferListItem} from '../../models/offer-list-item.ts';
 import {Map} from '../../components/map/map.tsx';
 import {Nullable} from 'vitest';
-import {useState} from 'react';
-import {Location} from '../../models/location.ts';
+import {Tabs} from '../../components/tabs/tabs.tsx';
+import {useEffect, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
+import {fillOrdersAction} from '../../store/actions.ts';
 
-type MainScreenProps = {
-  offers: OfferListItem[];
-  city: Location;
-};
 
-export function MainPage({offers, city}: MainScreenProps) {
+export function MainPage() {
   const [selectedId, setSelectedId] = useState<Nullable<string>>();
-  const points = offers.map((o) => ({ name: o.id, point: o.location }));
+
+  const city = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) =>
+    state.offers.filter((o) =>
+      o.city.name === city.name));
+
+  const points = offers.map((o) => ({name: o.id, point: o.location}));
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fillOrdersAction());
+  });
 
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
-      <div className="tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item"
-                to={AppRoutes.Main}
-              >
-                <span>Paris</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item"
-                to={AppRoutes.Main}
-              >
-                <span>Cologne</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item"
-                to={AppRoutes.Main}
-              >
-                <span>Brussels</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item"
-                to={AppRoutes.Main}
-              >
-                <span>Amsterdam</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item"
-                to={AppRoutes.Main}
-              >
-                <span>Hamburg</span>
-              </Link>
-            </li>
-            <li className="locations__item">
-              <Link className="locations__item-link tabs__item"
-                to={AppRoutes.Main}
-              >
-                <span>Dusseldorf</span>
-              </Link>
-            </li>
-          </ul>
-        </section>
-      </div>
+      <Tabs selectedCity={city.name}/>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in {city.name}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -85,16 +45,16 @@ export function MainPage({offers, city}: MainScreenProps) {
                   className="places__option places__option--active"
                   tabIndex={0}
                 >
-                    Popular
+                  Popular
                 </li>
                 <li className="places__option" tabIndex={0}>
-                    Price: low to high
+                  Price: low to high
                 </li>
                 <li className="places__option" tabIndex={0}>
-                    Price: high to low
+                  Price: high to low
                 </li>
                 <li className="places__option" tabIndex={0}>
-                    Top rated first
+                  Top rated first
                 </li>
               </ul>
             </form>
@@ -104,7 +64,9 @@ export function MainPage({offers, city}: MainScreenProps) {
             />
           </section>
           <div className="cities__right-section">
-            <Map city={city} selectedPoint={points.find((p) => p.name === selectedId)} points={points} className="cities__map map"/>
+            <Map city={city} selectedPoint={points.find((p) => p.name === selectedId)} points={points}
+              className="cities__map map"
+            />
           </div>
         </div>
       </div>

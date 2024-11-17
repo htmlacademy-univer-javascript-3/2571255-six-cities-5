@@ -7,18 +7,7 @@ export const MockLocations: Location[] = [
     point: MockPoints[0]
   },
   {
-    name: 'Amsterdam',
-    point: MockPoints[1]
-  },
-  {
-    name: 'Amsterdam',
-    point: MockPoints[2]
-  },
-  {
-    name: 'Amsterdam',
-    point: MockPoints[3]
-  },
-  {
-    name: 'Amsterdam',
-    point: MockPoints[4]
-  }];
+    name: 'Paris',
+    point: MockPoints[5]
+  }
+];

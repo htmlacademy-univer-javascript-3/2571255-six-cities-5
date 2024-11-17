@@ -26,4 +26,29 @@ export const MockPoints: Point[] = [
     longitude: 4.939309666406198,
     zoom: 12
   },
+  {
+    latitude: 48.8667,
+    longitude: 2.3333,
+    zoom: 12
+  },
+  {
+    latitude: 48.96671924,
+    longitude: 2.533317134,
+    zoom: 12
+  },
+  {
+    latitude: 48.9125124,
+    longitude: 2.116312134,
+    zoom: 12
+  },
+  {
+    latitude: 48.3111524123,
+    longitude: 2.516312134,
+    zoom: 12
+  },
+  {
+    latitude: 49.0125124,
+    longitude: 2.01615612134,
+    zoom: 12
+  }
 ];

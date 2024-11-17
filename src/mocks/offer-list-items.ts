@@ -50,5 +50,53 @@ export const MockOffersList: OfferListItem[] = [
     isPremium: true,
     rating: 5.0,
     previewImage: 'https://14.design.htmlacademy.pro/static/hotel/4.jpg'
+  },
+  {
+    id: '5',
+    title: 'Cozy apartment in the city center',
+    type: 'apartment',
+    price: 120,
+    city: MockLocations[1],
+    location: MockPoints[6],
+    isFavorite: true,
+    isPremium: false,
+    rating: 4.5,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/1.jpg'
+  },
+  {
+    id: '6',
+    title: 'Spacious house with a garden',
+    type: 'house',
+    price: 250,
+    city: MockLocations[1],
+    location: MockPoints[7],
+    isFavorite: false,
+    isPremium: true,
+    rating: 5.0,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/2.jpg'
+  },
+  {
+    id: '7',
+    title: 'Modern studio in the heart of the city',
+    type: 'studio',
+    price: 90,
+    city: MockLocations[1],
+    location: MockPoints[8],
+    isFavorite: true,
+    isPremium: false,
+    rating: 4.0,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/3.jpg'
+  },
+  {
+    id: '8',
+    title: 'Luxury villa with a pool',
+    type: 'villa',
+    price: 500,
+    city: MockLocations[1],
+    location: MockPoints[9],
+    isFavorite: false,
+    isPremium: true,
+    rating: 5.0,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/4.jpg'
   }
 ];
