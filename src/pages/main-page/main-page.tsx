@@ -1,10 +1,10 @@
 import {Tabs} from '../../components/tabs/tabs.tsx';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
 import cn from 'classnames';
-import styles from './main-page.module.css';
 import {EmptyOfferList, OfferList} from './offer-list.tsx';
 import {cityOffersSelector} from '../../store/selectors.ts';
-import {changeCity} from '../../slices/city-slice.ts';
+import {changeCity} from '../../store/slices/city-slice.ts';
+import {Spinner} from '../../components/spinner/spinner.tsx';
 
 export function MainPage() {
 
@@ -26,11 +26,11 @@ export function MainPage() {
       />
       <div className="cities">
         {isLoading ? (
-          <div className={styles['cities__places-loading']} />
+          <Spinner/>
         ) : (
           <div
             className={cn('cities__places-container', 'container', {
-              'cities__places-container--empty': offers.length === 0,
+              'cities__places-container--empty': isEmpty,
             })}
           >
             {!isEmpty ? (

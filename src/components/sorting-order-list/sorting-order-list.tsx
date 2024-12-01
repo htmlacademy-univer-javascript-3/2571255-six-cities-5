@@ -2,7 +2,7 @@ import {memo, useState } from 'react';
 import cn from 'classnames';
 import { SortingOrder, sortingOrders } from '../../models/sorting-order.ts';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import {changeSortingOrder} from '../../slices/offer-slice.ts';
+import {changeSortingOrder} from '../../store/slices/offer-slice.ts';
 
 function SortingOrderListInternal() {
   const [isOpen, setIsOpen] = useState(false);

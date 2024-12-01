@@ -1,14 +1,17 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {OfferListItem} from '../../models/offer-list-item.ts';
+import {useMemo} from 'react';
 import {FavoritesCardList} from '../../components/place-card/place-card-list.tsx';
 
 type FavoritesListProps = {
   offers: OfferListItem[];
 };
 
-export function FavoritesList({offers}: FavoritesListProps){
-  const cities = Array.from(new Set(offers.map((o) => o.city.name).toSorted()));
-
+export function FavoritesList({offers}: FavoritesListProps) {
+  const cities = useMemo(
+    () => Array.from(new Set(offers.map((x) => x.city.name).toSorted())),
+    [offers]
+  );
   return (
     <ul className="favorites__list">
       {cities.map((c) => (

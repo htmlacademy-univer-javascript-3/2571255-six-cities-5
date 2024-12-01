@@ -1,11 +1,10 @@
-import {MockLocations} from '../mocks/locations.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type CityState = {
   city: string;
 }
 const initialState: CityState = {
-  city: MockLocations[0].name,
+  city: 'Paris',
 };
 export const citySlice = createSlice({
   name: 'city',
