@@ -30,7 +30,7 @@ export function MainPage() {
         ) : (
           <div
             className={cn('cities__places-container', 'container', {
-              'cities__places-container--empty': offers.length === 0,
+              'cities__places-container--empty': isEmpty,
             })}
           >
             {!isEmpty ? (

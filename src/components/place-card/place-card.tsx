@@ -7,6 +7,7 @@ import {RatingStars} from '../rating-stars/rating-stars.tsx';
 import {RatingClasses} from '../../constants/rating-classes.ts';
 import {Nullable} from 'vitest';
 import {memo} from 'react';
+import {CardBookmarkButton} from './bookmark-button.tsx';
 
 type PlaceCardProps = OfferListItem & {
   cardType: CardTypes;
@@ -67,19 +68,7 @@ export function PlaceCard({
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
-              <use xlinkHref="#icon-bookmark"/>
-            </svg>
-            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
+          <CardBookmarkButton offerId={id} isFavorite={isFavorite}/>
         </div>
         <RatingStars rating={rating} ratingClass={RatingClasses.PlaceCard} isValueHidden/>
         <h2 className="place-card__name">

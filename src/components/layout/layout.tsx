@@ -1,17 +1,28 @@
 import cn from 'classnames';
-import { Outlet, useLocation, Link } from 'react-router-dom';
+import { Outlet, useLocation, Link, useNavigate} from 'react-router-dom';
 import {AppRoutes} from '../../constants/app-routes.ts';
 import {AuthStatus} from '../../constants/auth-status.ts';
-import {useAppSelector} from '../../store/hooks.ts';
+import {useAppSelector, useAppDispatch} from '../../store/hooks.ts';
+import {logoutAction} from '../../store/api-actions.ts';
 
 export function Layout() {
   const location = useLocation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const pageClasses = cn('page', {
     'page--gray page--main': location.pathname === AppRoutes.Main as string,
     'page--gray page--login': location.pathname === AppRoutes.Login as string
   });
   const authStatus = useAppSelector((state) => state.auth.authorizationStatus);
   const user = useAppSelector((state) => state.auth.user);
+  const favoriteCount = useAppSelector(
+    (state) => state.offers.favorites.length
+  );
+
+  const logOut = () => {
+    dispatch(logoutAction());
+    navigate(AppRoutes.Main);
+  };
   return (
     <div className={pageClasses}>
       <header className="header">
@@ -44,11 +55,13 @@ export function Layout() {
                         <span className="header__user-name user__name">
                           {user.email}
                         </span>
-                        <span className="header__favorite-count">3</span>
+                        <span className="header__favorite-count">
+                          {favoriteCount}
+                        </span>
                       </Link>
                     </li>
                     <li className="header__nav-item">
-                      <Link to={'#'} className="header__nav-link"> {/* TODO: log out */}
+                      <Link to={AppRoutes.Main} onClick={logOut} className="header__nav-link">
                         <span className="header__signout">Sign out</span>
                       </Link>
                     </li>

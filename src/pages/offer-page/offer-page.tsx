@@ -12,6 +12,7 @@ import 'leaflet/dist/leaflet.css';
 import styles from './offerMap.module.css';
 import {useParams} from 'react-router-dom';
 import {NotFoundPage} from '../not-found-page/not-found-page.tsx';
+import {OfferBookmarkButton} from '../../components/place-card/bookmark-button.tsx';
 
 type OfferPageProps = {
   offers: Offer[];
@@ -59,15 +60,7 @@ export function OfferPage({offers, comments, nearbyOffers}: OfferPageProps) {
                 <h1 className="offer__name">
                   {offer.title}
                 </h1>
-                <button
-                  className={`button offer__bookmark-button ${offer.isFavorite ? 'offer__bookmark-button--active' : ''}`}
-                  type="button"
-                >
-                  <svg className="offer__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark"/>
-                  </svg>
-                  <span className="visually-hidden">{offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
-                </button>
+                <OfferBookmarkButton offerId={offer.id} isFavorite={offer.isFavorite} />
               </div>
               <RatingStars rating={offer.rating} isValueHidden={false} ratingClass={RatingClasses.Offer}/>
               <ul className="offer__features">

@@ -28,7 +28,7 @@ export function App({offers, comments, offerList}: AppProps) {
             <Route index path={AppRoutes.Main} element={<MainPage/>}/>
             <Route path={AppRoutes.Login} element={<LoginPage/>}></Route>
             <Route element={<PrivateRoute/>}>
-              <Route path={AppRoutes.Favourites} element={<FavoritesPage offers={offerList}/>}></Route>
+              <Route path={AppRoutes.Favourites} element={<FavoritesPage/>}></Route>
             </Route>
             <Route path={AppRoutes.Offer}
               element={<OfferPage comments={comments} offers={offers} nearbyOffers={offerList}/>}

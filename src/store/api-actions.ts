@@ -8,7 +8,46 @@ import {User} from '../models/user.ts';
 import {AuthData} from '../models/auth-data.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {setUser, changeAuthStatus} from '../slices/auth-slice.ts';
-import {fillOrders, setOrdersLoadingStatus} from '../slices/offer-slice.ts';
+import {fillOrders, setOrdersLoadingStatus, fillFavorites, changeFavoriteStatus} from '../slices/offer-slice.ts';
+import {FavoriteData} from '../models/favorites-data.ts';
+import {buildUrl} from '../services/api-utils.ts';
+
+export const fetchFavoritesAction = createAsyncThunk<
+    void,
+    undefined,
+    {
+        dispatch: AppDispatch;
+        state: State;
+        extra: AxiosInstance;
+    }
+>('FETCH_FAVORITES', async (_arg, {dispatch, getState, rejectWithValue, extra: api}) => {
+  if (getState().auth.authorizationStatus !== AuthStatus.Auth) {
+    return rejectWithValue('Unauthorized');
+  }
+  const {data} = await api.get<OfferListItem[]>(ApiRoutes.Favorite);
+  dispatch(fillFavorites(data));
+});
+
+export const changeFavoriteStatusAction = createAsyncThunk<
+    void,
+    FavoriteData,
+    {
+        dispatch: AppDispatch;
+        state: State;
+        extra: AxiosInstance;
+    }
+>('CHANGE_FAVORITE_STATUS', async ({ offerId, isFavorite }, { dispatch, getState, rejectWithValue, extra: api }) => {
+  if (getState().auth.authorizationStatus !== AuthStatus.Auth) {
+    return rejectWithValue('Unauthorized');
+  }
+  await api.post<OfferListItem>(
+    buildUrl(ApiRoutes.FavoriteStatus, {
+      offerId: offerId,
+      status: Number(isFavorite).toString(),
+    })
+  );
+  dispatch(changeFavoriteStatus({ offerId, isFavorite }));
+});
 
 export const fetchOrdersAction = createAsyncThunk<
     void,
@@ -54,12 +93,13 @@ export const loginAction = createAsyncThunk<
         state: State;
         extra: AxiosInstance;
     }>(
-      'user/login',
-      async ({ login: email, password }, { dispatch, extra: api }) => {
-        const user = (await api.post<User>(ApiRoutes.Login, { email, password })).data;
+      'LOGIN',
+      async ({login: email, password}, {dispatch, extra: api}) => {
+        const {data: user} = await api.post<User>(ApiRoutes.Login, {email, password});
         dispatch(setUser(user));
         saveToken(user.token);
         dispatch(changeAuthStatus(AuthStatus.Auth));
+        dispatch(fetchFavoritesAction());
       }
     );
 
@@ -71,8 +111,9 @@ export const logoutAction = createAsyncThunk<
         state: State;
         extra: AxiosInstance;
     }>(
-      'user/logout', async (_arg, { dispatch, extra: api }) => {
+      'LOGOUT', async (_arg, {dispatch, extra: api}) => {
         await api.delete(ApiRoutes.Logout);
         dropToken();
         dispatch(changeAuthStatus(AuthStatus.NoAuth));
+        dispatch(setUser(null));
       });
