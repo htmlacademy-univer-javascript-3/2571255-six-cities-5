@@ -6,6 +6,7 @@ import {AppRoutes} from '../../constants/app-routes.ts';
 import {RatingStars} from '../rating-stars/rating-stars.tsx';
 import {RatingClasses} from '../../constants/rating-classes.ts';
 import {Nullable} from 'vitest';
+import {memo} from 'react';
 
 type PlaceCardProps = OfferListItem & {
   cardType: CardTypes;
@@ -91,3 +92,5 @@ export function PlaceCard({
     </article>
   );
 }
+
+export const MemoPlaceCard = memo(PlaceCard);

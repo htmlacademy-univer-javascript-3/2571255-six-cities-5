@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import {memo, useState } from 'react';
 import cn from 'classnames';
 import { SortingOrder, sortingOrders } from '../../models/sorting-order.ts';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { changeSortingOrderAction } from '../../store/actions.ts';
+import {changeSortingOrder} from '../../slices/offer-slice.ts';
 
-export function SortingOrderList() {
+function SortingOrderListInternal() {
   const [isOpen, setIsOpen] = useState(false);
-  const selectedOrder = useAppSelector((state) => state.sortingOrder);
+  const selectedOrder = useAppSelector((state) => state.offers.sortingOrder);
   const dispatch = useAppDispatch();
   const open = () => setIsOpen(!isOpen);
   const changeOrder = (order: SortingOrder) => {
-    dispatch(changeSortingOrderAction(order));
+    dispatch(changeSortingOrder(order));
     open();
   };
   return (
@@ -43,3 +43,5 @@ export function SortingOrderList() {
     </form>
   );
 }
+
+export const SortingOrderList = memo(SortingOrderListInternal);

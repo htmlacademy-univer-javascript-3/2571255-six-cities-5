@@ -1,4 +1,4 @@
-import {PlaceCard} from './place-card.tsx';
+import {MemoPlaceCard} from './place-card.tsx';
 import {Nullable} from 'vitest';
 import {CardTypes} from '../../constants/card-types.ts';
 import {OfferListItem} from '../../models/offer-list-item.ts';
@@ -18,13 +18,13 @@ function CardList({offers, listType, onItemHover, width, height, className}: Gen
   return (
     <div className={className}>
       {offers.map((offer) => (
-        <PlaceCard
+        <MemoPlaceCard
           key={offer.id}
           {...offer}
           width={width}
           height={height}
           cardType={listType}
-          onHover={(id) => onItemHover?.call(null, id)}
+          onHover={onItemHover}
         />
       ))}
     </div>
