@@ -7,10 +7,34 @@ import {OfferListItem} from '../models/offer-list-item.ts';
 import {User} from '../models/user.ts';
 import {AuthData} from '../models/auth-data.ts';
 import {dropToken, saveToken} from '../services/token.ts';
-import {setUser, changeAuthStatus} from '../slices/auth-slice.ts';
-import {fillOrders, setOrdersLoadingStatus, fillFavorites, changeFavoriteStatus} from '../slices/offer-slice.ts';
+import {setUser, changeAuthStatus} from './slices/auth-slice.ts';
+import {fillOrders, setOrdersLoadingStatus, fillFavorites, changeFavoriteStatus} from './slices/offer-slice.ts';
+import {fillNearbyOffers, fillReviews, updateOffer, addComment} from './slices/current-offer-slice.ts';
+import {Comment} from '../models/comment.ts';
+import {Offer} from '../models/offer.ts';
 import {FavoriteData} from '../models/favorites-data.ts';
 import {buildUrl} from '../services/api-utils.ts';
+import {CommentData} from '../models/comment-data.ts';
+
+export const sendComment = createAsyncThunk<
+  void,
+  CommentData,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  'SEND_REVIEW',
+  async ({ offerId, formData }, { dispatch, getState, rejectWithValue, extra: api }) => {
+    if (getState().auth.authorizationStatus !== AuthStatus.Auth) {
+      return rejectWithValue('Unauthorized');
+    }
+    const { data: review } = await api.post<Comment>(buildUrl(ApiRoutes.Comments, { offerId }), formData);
+    dispatch(addComment(review));
+  }
+);
+
 
 export const fetchFavoritesAction = createAsyncThunk<
     void,
@@ -27,6 +51,32 @@ export const fetchFavoritesAction = createAsyncThunk<
   const {data} = await api.get<OfferListItem[]>(ApiRoutes.Favorite);
   dispatch(fillFavorites(data));
 });
+
+export const fetchOffer = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  'FETCH_OFFER',
+  async (offerId, { dispatch, extra: api }) => {
+    const { data: newOffer } = await api.get<Offer>(
+      buildUrl(ApiRoutes.Offer, { offerId })
+    );
+    dispatch(updateOffer(newOffer));
+    const { data: newReviews } = await api.get<Comment[]>(
+      buildUrl(ApiRoutes.Comments, { offerId })
+    );
+    dispatch(fillReviews(newReviews));
+    const { data: newNearbyOffers } = await api.get<OfferListItem[]>(
+      buildUrl(ApiRoutes.OffersNearby, { offerId })
+    );
+    dispatch(fillNearbyOffers(newNearbyOffers));
+  }
+);
 
 export const changeFavoriteStatusAction = createAsyncThunk<
     void,

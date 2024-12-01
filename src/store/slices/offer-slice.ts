@@ -1,7 +1,7 @@
-import {OfferListItem} from '../models/offer-list-item.ts';
-import {SortingOrder} from '../models/sorting-order.ts';
+import {OfferListItem} from '../../models/offer-list-item.ts';
+import {SortingOrder} from '../../models/sorting-order.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {FavoriteData} from '../models/favorites-data.ts';
+import {FavoriteData} from '../../models/favorites-data.ts';
 
 type OffersState = {
   offers: OfferListItem[];

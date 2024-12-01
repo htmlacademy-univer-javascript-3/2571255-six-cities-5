@@ -1,31 +1,44 @@
-import {Offer} from '../../models/offer.ts';
-import {Comment} from '../../models/comment.ts';
 import {OfferGoods} from './offer-goods.tsx';
 import {CommentList} from '../../components/comments/comment-list.tsx';
 import {CommentForm} from '../../components/comments/comment-form.tsx';
 import {RatingStars} from '../../components/rating-stars/rating-stars.tsx';
 import {RatingClasses} from '../../constants/rating-classes.ts';
-import {OfferListItem} from '../../models/offer-list-item.ts';
 import {Map} from '../../components/map/map.tsx';
 import {NearbyCardList} from '../../components/place-card/place-card-list.tsx';
 import 'leaflet/dist/leaflet.css';
 import styles from './offerMap.module.css';
-import {useParams} from 'react-router-dom';
-import {NotFoundPage} from '../not-found-page/not-found-page.tsx';
 import {OfferBookmarkButton} from '../../components/place-card/bookmark-button.tsx';
+import {AppRoutes} from '../../constants/app-routes.ts';
+import {useAppSelector, useAppDispatch} from '../../store/hooks.ts';
+import {useOfferPage} from './use-offer-page.ts';
+import {useNavigate} from 'react-router-dom';
+import {useEffect} from 'react';
+import {Spinner} from '../../components/spinner/spinner.tsx';
+import {AuthStatus} from '../../constants/auth-status.ts';
+import {clearOffer} from '../../store/slices/current-offer-slice.ts';
 
-type OfferPageProps = {
-  offers: Offer[];
-  comments: Comment[];
-  nearbyOffers: OfferListItem[];
-};
+export function OfferPage() {
 
-export function OfferPage({offers, comments, nearbyOffers}: OfferPageProps) {
-  const params = useParams();
-  const offer = offers.find((o) => o.id === params.id);
+  const authStatus = useAppSelector((state) => state.auth.authorizationStatus);
+  const { offer, comments, nearbyOffers, error, isLoading } = useOfferPage();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  if (!offer){
-    return (<NotFoundPage/>);
+  useEffect(() => {
+    if (error !== undefined || (!isLoading && offer === undefined)) {
+      navigate(AppRoutes.NotFound);
+    }
+  }, [error, navigate, offer, isLoading]);
+
+  useEffect(
+    () => () => {
+      dispatch(clearOffer());
+    },
+    [dispatch]
+  );
+
+  if (isLoading || offer === undefined) {
+    return <Spinner />;
   }
 
   const offerLocation = {name: offer.id, location: offer.location};
@@ -100,7 +113,7 @@ export function OfferPage({offers, comments, nearbyOffers}: OfferPageProps) {
               </div>
               <section className="offer__reviews reviews">
                 <CommentList comments={comments}/>
-                <CommentForm/>
+                {authStatus === AuthStatus.Auth && <CommentForm />}
               </section>
             </div>
           </div>

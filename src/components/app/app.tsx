@@ -7,19 +7,11 @@ import {NotFoundPage} from '../../pages/not-found-page/not-found-page.tsx';
 import {AppRoutes} from '../../constants/app-routes.ts';
 import {PrivateRoute} from '../private-route/private-route.tsx';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page.tsx';
-import {Offer} from '../../models/offer.ts';
-import {Comment} from '../../models/comment.ts';
-import {OfferListItem} from '../../models/offer-list-item.ts';
 import {Provider} from 'react-redux';
 import {store} from '../../store';
 
-type AppProps = {
-  offerList: OfferListItem[];
-  offers: Offer[];
-  comments: Comment[];
-};
 
-export function App({offers, comments, offerList}: AppProps) {
+export function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -31,10 +23,10 @@ export function App({offers, comments, offerList}: AppProps) {
               <Route path={AppRoutes.Favourites} element={<FavoritesPage/>}></Route>
             </Route>
             <Route path={AppRoutes.Offer}
-              element={<OfferPage comments={comments} offers={offers} nearbyOffers={offerList}/>}
+              element={<OfferPage/>}
             >
             </Route>
-            <Route path='*' element={<NotFoundPage/>}></Route>
+            <Route path={AppRoutes.NotFound} element={<NotFoundPage/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
