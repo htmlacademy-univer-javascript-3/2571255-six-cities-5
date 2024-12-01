@@ -1,8 +1,8 @@
 import {Tabs} from '../../components/tabs/tabs.tsx';
-import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
-import {changeCityAction, fillOrdersAction} from '../../store/actions.ts';
+import {changeCityAction} from '../../store/actions.ts';
 import cn from 'classnames';
+import styles from './main-page.module.css';
 import {EmptyOfferList, OfferList} from './offer-list.tsx';
 
 
@@ -11,11 +11,11 @@ export function MainPage() {
   const offers = useAppSelector((state) =>
     state.offers.filter((o) =>
       o.city.name === city));
+
+  const isLoading = useAppSelector((state) => state.offersLoadingStatus);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fillOrdersAction());
-  });
+
   const isEmpty = offers.length === 0;
   return (
     <main
@@ -28,17 +28,21 @@ export function MainPage() {
         onClick={(c) => dispatch(changeCityAction(c))}
       />
       <div className="cities">
-        <div
-          className={cn('cities__places-container', 'container', {
-            'cities__places-container--empty': offers.length === 0,
-          })}
-        >
-          {!isEmpty ? (
-            <OfferList offers={offers} city={offers[0].city}/>
-          ) : (
-            <EmptyOfferList city={city}/>
-          )}
-        </div>
+        {isLoading ? (
+          <div className={styles['cities__places-loading']} />
+        ) : (
+          <div
+            className={cn('cities__places-container', 'container', {
+              'cities__places-container--empty': offers.length === 0,
+            })}
+          >
+            {!isEmpty ? (
+              <OfferList offers={offers} city={offers[0].city} />
+            ) : (
+              <EmptyOfferList city={city} />
+            )}
+          </div>
+        )}
       </div>
     </main>
   );
