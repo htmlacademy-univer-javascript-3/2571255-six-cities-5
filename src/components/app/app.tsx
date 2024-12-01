@@ -5,7 +5,6 @@ import {OfferPage} from '../../pages/offer-page/offer-page.tsx';
 import {Layout} from '../layout/layout.tsx';
 import {NotFoundPage} from '../../pages/not-found-page/not-found-page.tsx';
 import {AppRoutes} from '../../constants/app-routes.ts';
-import {AuthStatus} from '../../constants/auth-status.ts';
 import {PrivateRoute} from '../private-route/private-route.tsx';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page.tsx';
 import {Offer} from '../../models/offer.ts';
@@ -28,7 +27,7 @@ export function App({offers, comments, offerList}: AppProps) {
           <Route element={<Layout/>}>
             <Route index path={AppRoutes.Main} element={<MainPage/>}/>
             <Route path={AppRoutes.Login} element={<LoginPage/>}></Route>
-            <Route element={<PrivateRoute authStatus={AuthStatus.Auth}/>}>
+            <Route element={<PrivateRoute/>}>
               <Route path={AppRoutes.Favourites} element={<FavoritesPage offers={offerList}/>}></Route>
             </Route>
             <Route path={AppRoutes.Offer}
