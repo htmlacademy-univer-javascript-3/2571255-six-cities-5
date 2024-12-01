@@ -9,9 +9,19 @@ import {PrivateRoute} from '../private-route/private-route.tsx';
 import {FavoritesPage} from '../../pages/favorites-page/favorites-page.tsx';
 import {Provider} from 'react-redux';
 import {store} from '../../store';
-
+import {useEffect} from 'react';
+import {checkAuthAction, fetchFavoritesAction, fetchOrdersAction} from '../../store/api-actions.ts';
 
 export function App() {
+
+  useEffect(() => {
+    (async ()=> {
+      store.dispatch(fetchOrdersAction());
+      await store.dispatch(checkAuthAction());
+      await store.dispatch(fetchFavoritesAction());
+    })();
+  }, []);
+
   return (
     <Provider store={store}>
       <BrowserRouter>
